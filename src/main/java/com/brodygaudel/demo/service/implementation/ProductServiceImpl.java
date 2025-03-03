@@ -36,7 +36,21 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public ProductDTO saveProduct(@NotNull ProductDTO productDTO) throws CategoryNotFoundException {
         log.info("In saveProduct() :");
-        Category category = categoryRepository.findById(productDTO.categoryId()).orElseThrow( () -> new CategoryNotFoundException("category not found"));
+        Category category = categoryRepository.findById(produimport com.brodygaudel.demo.exception.CategoryNotFoundException;
+import com.brodygaudel.demo.exception.ProductNotFoundException;
+import com.brodygaudel.demo.repository.CategoryRepository;
+import com.brodygaudel.demo.repository.ProductRepository;
+import com.brodygaudel.demo.service.ProductService;
+import com.brodygaudel.demo.util.Mappers;
+import lombok.extern.slf4j.Slf4j;
+import org.jetbrains.annotations.NotNull;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.UUID;
+ctDTO.categoryId()).orElseThrow( () -> new CategoryNotFoundException("category not found"));
         Product product = mappers.fromProductDTO(productDTO);
         product.setCategory(category);
         product.setId(UUID.randomUUID().toString());
